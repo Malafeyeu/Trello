@@ -1,0 +1,171 @@
+@import "colors&fonts";
+@import "variables.scss";
+
+//Вложенность
+.trello {
+  margin: 0;
+  background-color: $gray;
+  //Хедер трелло с таймером
+  .trello-header {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    @include header;
+    .trello-header__headline {
+      @include font;
+      font-size: 28px;
+    }
+    .trello-header__timer {
+      @include font;
+      width: 100px;
+      height: 40px;
+      background-color: $white;
+      @include flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+  }
+  //Карточки трелло (туду, прогресс, доне)
+  .trello-main {
+    margin: 0 auto;
+    width: 95%;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    //TO DO
+    .container-todo {
+      @include containers;
+      @include font;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .container-todo__header {
+        @include container-header;
+        background-color: $green;
+      }
+      .container-tasks {
+        @include container-main;
+        //TASK в TODO
+        .task-todo {
+          @include task;
+          @include flex;
+          background-color: $green;
+          flex-direction: column;
+          .task-todo-title {
+            @include flex;
+            .task-title__title {
+            }
+            .btns-todo {
+              .btns-todo__btn-edit {
+                @include button-in-task;
+              }
+              .btns-todo__btn-delete {
+                @include button-in-task;
+              }
+            }
+          }
+          .task-todo-description {
+            @include flex;
+            .task-description__info {
+            }
+          }
+          .task-todo-user {
+            @include flex;
+            .task-todo-user__user-name {
+            }
+            .task-todo-user__time {
+            }
+          }
+        }
+      }
+      .container-todo__footer {
+        @include container-footer;
+        background-color: $green;
+      }
+    }
+    //IN PROGRESS
+    .container-inprogress {
+      @include containers;
+      @include font;
+      .container-inprogress__header {
+        @include container-header;
+        background-color: $gray;
+      }
+      .container-tasks {
+        @include container-main;
+        //TASK в IN PROGRESS
+        .task-inprogress {
+          @include task;
+          @include flex;
+          background-color: $gray;
+          flex-direction: column;
+          .task-inprogress-title {
+            @include flex;
+            .task-inprogress-title__title {
+            }
+          }
+          .task-inprogress-description {
+            @include flex;
+            .task-inprogress-description__info {
+            }
+          }
+          .task-inprogress-user {
+            @include flex;
+            .task-inprogress-user__user-name {
+            }
+            .task-inprogress-user__time {
+            }
+          }
+        }
+      }
+    }
+    //DONE
+    .container-done {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      @include containers;
+      @include font;
+      .container-done__header {
+        @include container-header;
+        background-color: $blue;
+      }
+      .container-tasks {
+        @include container-main;
+        //TASK в DONE
+        .task-done {
+          @include task;
+          @include flex;
+          background-color: $blue;
+          flex-direction: column;
+          .task-done-title {
+            @include flex;
+            .task-done-title__title {
+            }
+            .task-done-title__btn-delete {
+              @include button-in-task;
+            }
+          }
+          .task-done-description {
+            @include flex;
+            .task-done-description__info {
+            }
+          }
+          .task-done-user {
+            @include flex;
+            .task-done-user__user-name {
+            }
+            .task-done-user__time {
+            }
+          }
+        }
+      }
+      .container-done__footer {
+        @include container-footer;
+        background-color: $blue;
+      }
+    }
+  }
+}
