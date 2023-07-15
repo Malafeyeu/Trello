@@ -34,111 +34,74 @@
     <main>
       <div class="trello-main">
         <!-- TO DO -->
-        <div class="main__container-todo">
-          <div class="main__container-todo__header">
+        <div class="container-todo">
+          <div class="container-todo__header">
             <div>TODO:</div>
-            <div>2</div>
+            <div class="todo-header__counter">++counter</div>
           </div>
-          <div class="main__container-tasks">
-            <div class="main__container-todo__task">
-              <div class="main__container-todo__task-title">
-                <div class="main__container-todo__task-title__info">Title</div>
-                <div class="main__container-todo__task-title__buttons">
-                  <button class="main__container-todo__task-title__button-edit">
-                    EDIT
-                  </button>
-                  <button
-                    class="main__container-todo__task-title__button-delete"
-                  >
-                    DELETE
-                  </button>
+          <div class="container-tasks">
+            <div class="task-todo">
+              <div class="task-todo-title">
+                <div class="task-todo-title__title">Title</div>
+                <div class="btns-todo">
+                  <button class="btns-todo__btn-edit">EDIT</button>
+                  <button class="btns-todo__btn-delete">DELETE</button>
                 </div>
               </div>
-              <div class="main__container-todo__task-description">
-                <div class="main__container-todo__task-description__info">
-                  Description
-                </div>
-                <button
-                  class="main__container-todo__task-description__button-arrow"
-                >
-                  >
-                </button>
+              <div class="task-todo-description">
+                <div class="task-todo-description__info">Description</div>
               </div>
-              <div class="main__container-todo__task-user">
-                <div class="main__container-todo__task-user__info">User</div>
-                <div class="main__container-todo__task-user__info">Time</div>
+              <div class="task-todo-user">
+                <div class="task-todo-user__user-name">User</div>
+                <div class="task-todo-user__time">Time</div>
               </div>
             </div>
           </div>
-          <button class="main__container-todo__footer">Add todo</button>
+          <button class="container-todo__footer">Add todo</button>
         </div>
         <!-- IN PROGRESS -->
-        <div class="main__container-inprogress">
-          <div class="main__container-inprogress__header">
+        <div class="container-inprogress">
+          <div class="container-inprogress__header">
             <div>IN PROGRESS:</div>
-            <div>1</div>
+            <div class="inprogress-header__counter">++counter</div>
           </div>
-          <div class="main__container-tasks">
-            <div class="main__container-inprogress__task">
-              <div class="main__container-inprogress__task-title">
-                <div class="main__container-inprogress__task-title__info">
-                  Title
-                </div>
-                <div class="main__container-inprogress__task-title__buttons">
-                  <button
-                    class="main__container-inprogress__task-title__button-back"
-                  >
-                    BACK
-                  </button>
-                  <button
-                    class="main__container-inprogress__task-title__button-complete"
-                  >
-                    COMPLETE
-                  </button>
-                </div>
+          <div class="container-tasks">
+            <div class="task-inprogress">
+              <div class="task-inprogress-title">
+                <div class="task-inprogress-title__title">Title</div>
               </div>
-              <div class="main__container-inprogress__task-description">
-                <div class="main__container-inprogress__task-description__info">
-                  Description
-                </div>
+              <div class="task-inprogress-description">
+                <div class="task-inprogress-description__info">Description</div>
               </div>
-              <div class="main__container-inprogress__task-user">
-                <div class="main__container-inprogress__task-user__info">
-                  User
-                </div>
-                <div class="main__container-inprogress__task-user__info">
-                  Time
-                </div>
+              <div class="task-inprogress-user">
+                <div class="task-inprogress-user__user-name">User</div>
+                <div class="task-inprogress-user__time">Time</div>
               </div>
             </div>
           </div>
         </div>
         <!-- DONE -->
-        <div class="main__container-done">
-          <div class="main__container-done__header">
+        <div class="container-done">
+          <div class="container-done__header">
             <div>DONE:</div>
-            <div>1</div>
+            <div class="done-header__counter">++counter</div>
           </div>
-          <div class="main__container-tasks">
-            <div class="main__container-done__task">
-              <div class="main__container-done__task-title">
-                <div class="main__container-done__task-title__info">Title</div>
-                <button class="main__container-done__task-title__button-delete">
-                  DELETE
-                </button>
+          <div class="container-tasks">
+            <div class="task-done">
+              <div class="task-done-title">
+                <div class="task-done-title__title">Title</div>
+                <button class="task-done-title__btn-delete">DELETE</button>
               </div>
-              <div class="main__container-done__task-description">
-                <div class="main__container-done__task-description__info">
-                  Description
-                </div>
+              <div class="task-done-description">
+                <div class="task-done-description__info">Description</div>
               </div>
-              <div class="main__container-done__task-user">
-                <div class="main__container-done__task-user__info">User</div>
-                <div class="main__container-done__task-user__info">Time</div>
+              <div class="task-done-user">
+                <div class="task-done-user__user-name">User</div>
+                <div class="task-done-user__time">Time</div>
               </div>
             </div>
           </div>
-          <button class="main__container-done__footer">Delete All</button>
+          <button class="container-done__footer">Delete All</button>
         </div>
       </div>
     </main>

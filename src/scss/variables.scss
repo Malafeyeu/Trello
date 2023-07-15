@@ -2,10 +2,9 @@
 
 //миксин хедера-трелло c временем
 @mixin header {
-  width: 1400px;
-  height: 150px;
+  width: 100%;
+  height: 130px;
   margin-bottom: 20px;
-  margin-top: 10px;
   background-color: $purple;
   border-radius: 20px;
 }
@@ -13,7 +12,7 @@
 //миксинs карточки
 @mixin containers {
   width: 300px;
-  height: 650px;
+  height: 560px;
   background-color: rgb(255, 255, 255);
   border: 1px solid black;
   border-radius: 20px;
@@ -22,8 +21,8 @@
 
 //миксин хедера карточки
 @mixin container-header {
-  width: 300px;
-  height: 100px;
+  max-width: 300px;
+  height: 60px;
   border: 1px solid rgb(183, 183, 183);
   border-radius: 20px;
   display: flex;
@@ -34,13 +33,13 @@
 //миксин мейна карточки
 @mixin container-main {
   width: 300px;
-  height: 470px;
+  height: 440px;
 }
 
 //миксин футтера карточки
 @mixin container-footer {
-  width: 300px;
-  height: 80px;
+  width: 100%;
+  height: 60px;
   border: 1px solid rgb(183, 183, 183);
   border-radius: 20px;
 }
@@ -48,8 +47,8 @@
 //Миксины task
 //task
 @mixin task {
-  width: 280px;
-  height: 200px;
+  width: 93%;
+  height: 190px;
   margin: 10px;
   border-radius: 20px;
   background-color: rgb(233, 212, 212);
@@ -67,8 +66,5 @@
 @mixin flex {
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
 }
