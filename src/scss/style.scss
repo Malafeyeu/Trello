@@ -5,6 +5,7 @@
 .trello {
   margin: 0;
   background-color: $gray;
+  padding: 15px;
   //Хедер трелло с таймером
   .trello-header {
     margin: 0 auto;
@@ -46,6 +47,26 @@
         background-color: $green;
       }
       .container-tasks {
+        //добавление скролла
+        overflow-y: auto;
+        /* width */
+          &::-webkit-scrollbar {
+            width: 5px;
+          }
+          /* Track */
+          &::-webkit-scrollbar-track {
+            background: #fafafa; 
+          }
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            // background: #888; 
+            background: $green;
+            border: 1px solid #b7b7b7;
+          }
+          /* Handle on hover */
+          &::-webkit-scrollbar-thumb:hover {
+            background: #c2d1bf;
+          }
         @include container-main;
         //TASK в TODO
         .task-todo {
@@ -68,7 +89,14 @@
           }
           .task-todo-description {
             @include flex;
+            align-items: center;
             .task-description__info {
+              @include flex;
+            }
+            .btns-todo__btn-toInprogress{
+              width: 30px;
+              height: 50px;  
+              @include button-in-task;         
             }
           }
           .task-todo-user {
@@ -87,6 +115,7 @@
     }
     //IN PROGRESS
     .container-inprogress {
+      overflow: hidden;
       @include containers;
       @include font;
       .container-inprogress__header {
@@ -94,7 +123,28 @@
         background-color: $gray;
       }
       .container-tasks {
+        //добавление скролла
+        overflow-y: auto;
+        /* width */
+          &::-webkit-scrollbar {
+            width: 5px;
+          }
+          /* Track */
+          &::-webkit-scrollbar-track {
+            background: #fafafa; 
+          }
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            // background: #888; 
+            background: $gray;
+            border: 1px solid #b7b7b7;
+          }
+          /* Handle on hover */
+          &::-webkit-scrollbar-thumb:hover {
+            background: #d9d9d9;
+          }
         @include container-main;
+        height: 497px;
         //TASK в IN PROGRESS
         .task-inprogress {
           @include task;
@@ -104,6 +154,14 @@
           .task-inprogress-title {
             @include flex;
             .task-inprogress-title__title {
+            }
+            .btns-inprogress {
+              .btns-inprogress__btn-back {
+                @include button-in-task;
+              }
+              .btns-inprogress__btn-complete {
+                @include button-in-task;
+              }
             }
           }
           .task-inprogress-description {
@@ -133,6 +191,26 @@
         background-color: $blue;
       }
       .container-tasks {
+        //добавление скролла
+        overflow-y: auto;
+        /* width */
+          &::-webkit-scrollbar {
+            width: 5px;
+          }
+          /* Track */
+          &::-webkit-scrollbar-track {
+            background: #fafafa; 
+          }
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            // background: #888; 
+            background: $blue;
+            border: 1px solid #b7b7b7;
+          }
+          /* Handle on hover */
+          &::-webkit-scrollbar-thumb:hover {
+            background: #c7d1e4;
+          }
         @include container-main;
         //TASK в DONE
         .task-done {
