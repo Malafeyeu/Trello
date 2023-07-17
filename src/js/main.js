@@ -37,36 +37,40 @@ cancelButton.addEventListener("click", function(){
 
 //сломалось
 //кнопка редактирования задачи
-// parentOfAllTodos.addEventListener("click", function(event){
-//     if (event.target.dataset.action === "edit"){
-//         const taskToEdit = event.target.closest(".task-todo");
-//         const idEdit = taskToEdit.getAttribute("id");
-//         todo.forEach (function(element, index) {
-//             if(element.id == idEdit){
-//                 let newTask = todo.splice(index, 1)[0];
-//                 console.log(newTask);
-//                 inputEditTitle.value = `${newTask.title}`;
-//                 inputEditDescription.value = `${newTask.description}`;
-//                 console.log(addButtonEdit)
-//                 addButtonEdit.addEventListener("click", function(){
-//                     let editTask = {
-//                         id: newTask.id,
-//                         title: `${inputEditTitle.value}`,
-//                         description: `${inputEditDescription.value}`,
-//                         user: "xxx", //добавить пользователя
-//                         time: newTask.time,
-//                     }
-//                     taskToEdit.remove();
-//                     todo.push(editTask)
-
-//                     createTodo(editTask)
-//                     console.log(editTask)
-//                     console.log(todo)
-//                 })
-//             }
-//         })
-//     }
-// })
+parentOfAllTodos.addEventListener("click", function(event){
+  if (event.target.dataset.action === "edit"){
+    const taskToEdit = event.target.closest(".task-todo");
+    const idEdit = taskToEdit.getAttribute("id");
+    todo.forEach (function(element, index) {
+      if(element.id == idEdit){
+        let newTask = todo.splice(index, 1)[0];
+        console.log(newTask);   
+        inputEditTitle.value = `${newTask.title}`;
+        inputEditDescription.value = `${newTask.description}`;
+        console.log(addButtonEdit)
+        addButtonEdit.addEventListener("click", function(){
+          console.log(todo)
+          for (let item in newTask) {
+            if (newTask[item] == idEdit) {
+              newTask.title = inputEditTitle.value
+              newTask.description = inputEditDescription.value
+              document.getElementsByClassName("task-todo-title__title")[0]
+              .textContent = newTask.title
+              document.getElementsByClassName("task-todo-description__info")[0]
+              .textContent = inputEditDescription.value
+              if (todo[0]){
+                todo.pop()
+                todo.push(newTask)
+              } else {
+                todo.push(newTask)
+              }
+            }
+          }
+        })
+      }
+    })
+  }
+})
 
 
 //удаление задачи из списка и из массива в туду
