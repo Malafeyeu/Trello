@@ -1,7 +1,8 @@
 export {createTodo, createInprogress, createDone,
-    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone}
+    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone,
+    addToLocalStorage}
 
-//родитель, в который закидываются все таски
+//родитель, в который генерируются все таски
     //для туду
     const parentOfAllTodos = document.getElementsByClassName("container-tasks")[0];
     //для инпрогресс
@@ -186,4 +187,8 @@ function createDone(obj){
         todoUserTime.classList.add("task-done-user__time");
         todoUserTime.innerText = `${obj.time}`
         todoUser.append(todoUserTime);
+}
+
+function addToLocalStorage(key, array){
+  localStorage.setItem(key, JSON.stringify(array))
 }

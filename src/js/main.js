@@ -1,5 +1,4 @@
-import {todo, inprogress, done, 
-    addButton, cancelButton, 
+import { addButton, cancelButton, 
     addButtonEdit, cancelButtonEdit,
     inputTitle, inputDescription, 
     inputEditTitle, inputEditDescription,
@@ -7,7 +6,40 @@ import {todo, inprogress, done,
     counterOne, counterTwo, counterThree} from "./variables.js";
 
 import { createTodo, createInprogress, createDone,
-    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone } from "./functions.js";
+    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone,
+    addToLocalStorage} from "./functions.js";
+
+let todo = [];
+let inprogress = [];
+let done = [];
+
+//получаем массивы из local storage
+getTodoFromLocalStorage();
+console.log(todo);
+getInprogressFromLocalStorage();
+console.log(inprogress);
+getDoneFromLocalStorage();
+console.log(done);
+
+//генерируем задачи, исходя из полученных массивов
+if(todo.length !== 0) {
+  for (let i = 0; i < todo.length; i++){
+      createTodo(todo[i]);
+      counterOne.innerText = todo.length;
+  }
+}
+if(inprogress.length !== 0) {
+  for (let i = 0; i < inprogress.length; i++){
+      createInprogress(inprogress[i]);
+      counterTwo.innerText = inprogress.length;
+  }
+}
+if(done.length !== 0) {
+  for (let i = 0; i < done.length; i++){
+      createDone(done[i]);
+      counterThree.innerText = done.length;
+  }
+}
 
 //добавление задачи
 addButton.addEventListener("click", function(){
@@ -27,6 +59,7 @@ addButton.addEventListener("click", function(){
     //считаем количество задач и выводим в хедер
     let howManyTasks = todo.length;
     counterOne.innerText = howManyTasks;
+    addToLocalStorage("todo", todo);
 })
 
 //очистка инпутов при отмене ввода задачи
@@ -84,6 +117,7 @@ parentOfAllTodos.addEventListener("click", function(event){
                 todo.splice(index, 1);
                 let howManyTasks = todo.length;
                 counterOne.innerText = howManyTasks;
+                addToLocalStorage("todo", todo);
             }
     })
 }})
@@ -104,6 +138,8 @@ parentOfAllTodos.addEventListener("click", function(event){
                     counterOne.innerText = howManyTasks;
                     let howManyTasksInp = inprogress.length;
                     counterTwo.innerText = howManyTasksInp;
+                    addToLocalStorage("todo", todo);
+                    addToLocalStorage("inprogress", inprogress);
                 } else {
                     alert("Oops! Unfortunately, you can't add more than 6 tasks here.")
                 }
@@ -127,8 +163,8 @@ parentOfAllInprogress.addEventListener("click", function(event){
                 counterOne.innerText = howManyTasks;
                 let howManyTasksInp = inprogress.length;
                 counterTwo.innerText = howManyTasksInp;
-                let howManyTasksDone = done.length;
-                counterThree.innerText = howManyTasksDone;
+                addToLocalStorage("todo", todo);
+                addToLocalStorage("inprogress", inprogress);
             }
         })
     }
@@ -149,6 +185,8 @@ parentOfAllInprogress.addEventListener("click", function(event){
                 counterTwo.innerText = howManyTasksInp;
                 let howManyTasksDone = done.length;
                 counterThree.innerText = howManyTasksDone;
+                addToLocalStorage("inprogress", inprogress);
+                addToLocalStorage("done", done);
             }
         })
     }
@@ -165,6 +203,7 @@ parentOfAllDone.addEventListener("click", function(event){
                 done.splice(index, 1);
                 let howManyTasksDone = done.length;
                 counterThree.innerText = howManyTasksDone;
+                addToLocalStorage("done", done);
             }
         })
     }
@@ -173,10 +212,30 @@ parentOfAllDone.addEventListener("click", function(event){
 //удаление всех задач в доне
 delAll.addEventListener("click", function () {
     const deleteAll = document.querySelectorAll('.task-done');
+    let delTask = confirm("Are you sure? You will not be able to cancel this action");
+    if (delTask === true) {
     for (let i = 0; i < deleteAll.length; i++) {
         deleteAll[i].remove();
     }
     done.splice(0, done.length);
     let howManyTasksDone = done.length;
     counterThree.innerText = howManyTasksDone;
+    addToLocalStorage("done", done);
+    }
 })
+
+function getTodoFromLocalStorage(){
+  if(localStorage.getItem("todo") !== null){
+    todo = JSON.parse(localStorage.getItem("todo"))
+  }
+}
+function getInprogressFromLocalStorage(){
+  if(localStorage.getItem("inprogress") !== null){
+    inprogress = JSON.parse(localStorage.getItem("inprogress"))
+  }
+}
+function getDoneFromLocalStorage(){
+  if(localStorage.getItem("done") !== null){
+    done = JSON.parse(localStorage.getItem("done"))
+  }
+}

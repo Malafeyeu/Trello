@@ -1,14 +1,9 @@
-export {todo, inprogress, done, 
-    addButton, cancelButton, 
+export { addButton, cancelButton, 
     addButtonEdit, cancelButtonEdit,
     inputTitle, inputDescription, 
     inputEditTitle, inputEditDescription,
     delAll, timeForTodos,
     counterOne, counterTwo, counterThree}
-
-let todo = [];
-let inprogress = [];
-let done = [];
 
 //кнопки добавления задачи и отмены добавления (из модального окна)
 const addButton = document.getElementsByClassName("addTodo-button")[0];
