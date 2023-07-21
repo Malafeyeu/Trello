@@ -189,6 +189,21 @@ function createDone(obj){
         todoUser.append(todoUserTime);
 }
 
+//функция TIME
+setInterval(function () {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let secondes = date.getSeconds();
+
+  if (hours < 10) hours = "0" + hours;
+  if (minutes < 10) minutes = "0" + minutes;
+  if (secondes < 10) secondes = "0" + secondes;
+  
+  document.querySelector(".trello-header__timer")
+  .textContent = hours + ":" + minutes + ":" + secondes;
+}, 100);
+
 function addToLocalStorage(key, array){
   localStorage.setItem(key, JSON.stringify(array))
 }
