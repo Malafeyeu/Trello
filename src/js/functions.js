@@ -1,6 +1,7 @@
 export {createTodo, createInprogress, createDone,
-    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone,
-    addToLocalStorage}
+    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone, 
+    selectUser, listOfUsers,selectEditUser,
+    addToLocalStorage, addUser}
 
 //родитель, в который генерируются все таски
     //для туду
@@ -9,6 +10,10 @@ export {createTodo, createInprogress, createDone,
     const parentOfAllInprogress = document.getElementsByClassName("container-tasks")[1];
     //для доне
     const parentOfAllDone = document.getElementsByClassName("container-tasks")[2];
+
+const selectUser = document.querySelector(".button__select-user");
+const listOfUsers = document.querySelector(".list__select-user");
+const selectEditUser = document.querySelector(".dropdown-editTask__button");
 
 //функция по созданию задачи
 function createTodo(obj){
@@ -204,6 +209,21 @@ setInterval(function () {
   .textContent = hours + ":" + minutes + ":" + secondes;
 }, 100);
 
+//сохранение а local storage
 function addToLocalStorage(key, array){
   localStorage.setItem(key, JSON.stringify(array))
+}
+
+//функция генерации пользователей
+function addUser(object){
+  const list = document.createElement("li");
+  list.setAttribute("id", `${object.id}`);
+  list.classList.add("user-to-select")
+  listOfUsers.append(list);
+
+  const user = document.createElement("a");
+  list.append(user);
+  user.innerText = `${object.username}`;
+  user.setAttribute("class", "dropdown-item");
+  user.setAttribute("data-action", "select");
 }

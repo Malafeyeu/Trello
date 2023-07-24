@@ -1,13 +1,14 @@
-import { addButton, cancelButton, 
-    addButtonEdit, cancelButtonEdit,
+import {addButton, cancelButton, 
+    addButtonEdit,
     inputTitle, inputDescription, 
     inputEditTitle, inputEditDescription,
     delAll, timeForTodos,
     counterOne, counterTwo, counterThree} from "./variables.js";
 
-import { createTodo, createInprogress, createDone,
-    parentOfAllTodos, parentOfAllInprogress, parentOfAllDone,
-    addToLocalStorage} from "./functions.js";
+import {createTodo, createInprogress, createDone,
+  parentOfAllTodos, parentOfAllInprogress, parentOfAllDone, 
+  selectUser, listOfUsers, selectEditUser,
+  addToLocalStorage, addUser} from "./functions.js";
 
 let todo = [];
 let inprogress = [];
@@ -21,6 +22,35 @@ let indexEditElement;
 getTodoFromLocalStorage();
 getInprogressFromLocalStorage();
 getDoneFromLocalStorage();
+
+//подтягиваем пользователей, генерируем список
+selectUser.addEventListener("click", async function(){
+  let users = await getUsers();
+  for (let i = 0; i < users.length; i++){
+      addUser(users[i])
+  }
+})
+async function getUsers(){
+  let response = await fetch("https://jsonplaceholder.typicode.com/users");
+  let users = await response.json();
+  return users
+}
+
+//выбор пользователя
+listOfUsers.addEventListener("click", function(event){
+  if (event.target.dataset.action === "select"){
+    const selectedUser = event.target.closest(".user-to-select");
+    getUsers().then(data => {
+      let users = data;
+      const idOfUser = selectedUser.getAttribute("id");
+      users.forEach (function(element) {
+        if(element.id == idOfUser){
+          selectUser.innerText = element.username;
+        }
+      })
+    })
+  }
+})
 
 //генерируем задачи, исходя из полученных массивов
 if(todo.length !== 0) {
@@ -48,7 +78,7 @@ addButton.addEventListener("click", function(){
         id: Date.now(),
         title: inputTitle.value,
         description: inputDescription.value,
-        user: "xxx", //добавить сюдаааааааа пользователяяяяяяяяяяяяяяяяяяяяя
+        user: selectUser.innerText,
         time: timeForTodos,
     }
     //залить обьект в массив, сгенерировать задачу
@@ -61,6 +91,7 @@ addButton.addEventListener("click", function(){
     let howManyTasks = todo.length;
     counterOne.innerText = howManyTasks;
     addToLocalStorage("todo", todo);
+    selectUser.innerText = "Select user";
 })
 
 //очистка инпутов при отмене ввода задачи
@@ -69,7 +100,6 @@ cancelButton.addEventListener("click", function(){
     inputDescription.value = "";
 })
 
-//сломалось
 //кнопка редактирования задачи
 parentOfAllTodos.addEventListener("click", function(event){
   if (event.target.dataset.action === "edit") {
@@ -83,6 +113,7 @@ parentOfAllTodos.addEventListener("click", function(event){
         indexEditElement = index;
         inputEditTitle.value = `${todo[indexEditElement].title}`;
         inputEditDescription.value = `${todo[indexEditElement].description}`;
+        selectEditUser.innerText = `${todo[indexEditElement].user}`;
       }
     })
   }
@@ -105,7 +136,7 @@ parentOfAllTodos.addEventListener("click", function(event){
   }
 })
 
-//кнопка добавления оттредачиной задачи
+//кнопка добавления отредаченной задачи
 addButtonEdit.addEventListener("click", function(){
   todo.forEach ((e, i) => {
 
@@ -119,8 +150,9 @@ addButtonEdit.addEventListener("click", function(){
       
       document.getElementsByClassName("task-todo-description__info")[i]
       .textContent = todo[indexEditElement].description;
-      
-      taskToEdit.classList.toggle("edit")
+
+      taskToEdit.classList.toggle("edit");
+      addToLocalStorage("todo", todo);
     }
   })
 })
@@ -215,7 +247,7 @@ parentOfAllDone.addEventListener("click", function(event){
 //удаление всех задач в доне
 delAll.addEventListener("click", function () {
   const deleteAll = document.querySelectorAll('.task-done');
-  let delTask = confirm("Are you sure? You will not be able to cancel this action");
+  let delTask = confirm("Are you sure? You will not be able to cancel this action later.");
   if (delTask === true) {
   for (let i = 0; i < deleteAll.length; i++) {
     deleteAll[i].remove();
