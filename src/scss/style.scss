@@ -53,6 +53,7 @@
           @include flex;
           background-color: $green;
           flex-direction: column;
+          
           .task-todo-title {
             @include flex;
             .task-title__title {
@@ -168,4 +169,12 @@
       }
     }
   }
+}
+
+.hide{
+  display: none;
+}
+
+.hovered{
+  background-color: azure;
 }
