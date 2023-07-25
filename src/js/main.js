@@ -26,10 +26,12 @@ getDoneFromLocalStorage();
 //подтягиваем пользователей, генерируем список
 selectUser.addEventListener("click", async function(){
   let users = await getUsers();
+  console.log(users)
   for (let i = 0; i < users.length; i++){
       addUser(users[i])
   }
 })
+
 async function getUsers(){
   let response = await fetch("https://jsonplaceholder.typicode.com/users");
   let users = await response.json();
@@ -37,7 +39,7 @@ async function getUsers(){
 }
 
 //выбор пользователя
-listOfUsers.addEventListener("click", function(event){
+selectEditUser.addEventListener("click", function(event){
   if (event.target.dataset.action === "select"){
     const selectedUser = event.target.closest(".user-to-select");
     getUsers().then(data => {

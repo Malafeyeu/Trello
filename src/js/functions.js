@@ -1,6 +1,6 @@
 export {createTodo, createInprogress, createDone,
     parentOfAllTodos, parentOfAllInprogress, parentOfAllDone, 
-    selectUser, listOfUsers,selectEditUser,
+    selectUser, listOfUsers, selectEditUser,
     addToLocalStorage, addUser}
 
 //родитель, в который генерируются все таски
@@ -11,9 +11,9 @@ export {createTodo, createInprogress, createDone,
     //для доне
     const parentOfAllDone = document.getElementsByClassName("container-tasks")[2];
 
-const selectUser = document.querySelector(".button__select-user");
-const listOfUsers = document.querySelector(".list__select-user");
-const selectEditUser = document.querySelector(".dropdown-editTask__button");
+const selectUser = document.querySelector(".dropdown-toggle");
+// const listOfUsers = document.querySelector(".dropdown-menu");
+const selectEditUser = document.querySelector(".dropdown-menu");
 
 //функция по созданию задачи
 function createTodo(obj){
@@ -219,7 +219,7 @@ function addUser(object){
   const list = document.createElement("li");
   list.setAttribute("id", `${object.id}`);
   list.classList.add("user-to-select")
-  listOfUsers.append(list);
+  selectEditUser.append(list);
 
   const user = document.createElement("a");
   list.append(user);
