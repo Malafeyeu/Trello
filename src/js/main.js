@@ -7,9 +7,10 @@ import {addButton, cancelButton,
 
 import {createTodo, createInprogress, createDone,
   parentOfAllTodos, parentOfAllInprogress, parentOfAllDone, 
-  selectUser, listOfUsers, selectEditUser,
-  addToLocalStorage, addUser} from "./functions.js";
+  selectUser, listOfUsers, selectEditUser, listEditUsers,
+  addToLocalStorage, addUser, addEditUser} from "./functions.js";
 
+//массивы для хранения данных
 let todo = [];
 let inprogress = [];
 let done = [];
@@ -24,22 +25,34 @@ getInprogressFromLocalStorage();
 getDoneFromLocalStorage();
 
 //подтягиваем пользователей, генерируем список
-selectUser.addEventListener("click", async function(){
-  let users = await getUsers();
-  console.log(users)
-  for (let i = 0; i < users.length; i++){
-      addUser(users[i])
-  }
-})
-
+  //для создания задачи
+  selectUser.addEventListener("click", async function(){
+    const allUsers = document.querySelectorAll('.user-to-select');
+    if (allUsers.length < 10){
+      let users = await getUsers();
+      for (let i = 0; i < users.length; i++){
+          addUser(users[i])
+      }
+    }
+  })
+  //для редактирования задачи
+  selectEditUser.addEventListener("click", async function(){
+    const allUsers = document.querySelectorAll('.user-to-edit');
+    if (allUsers.length < 10){
+      let users = await getUsers();
+      for (let i = 0; i < users.length; i++){
+          addEditUser(users[i])
+      }
+    }
+  })
 async function getUsers(){
   let response = await fetch("https://jsonplaceholder.typicode.com/users");
   let users = await response.json();
   return users
 }
 
-//выбор пользователя
-selectEditUser.addEventListener("click", function(event){
+//выбор пользователя при создании задачи
+listOfUsers.addEventListener("click", function(event){
   if (event.target.dataset.action === "select"){
     const selectedUser = event.target.closest(".user-to-select");
     getUsers().then(data => {
@@ -48,6 +61,26 @@ selectEditUser.addEventListener("click", function(event){
       users.forEach (function(element) {
         if(element.id == idOfUser){
           selectUser.innerText = element.username;
+        }
+      })
+    })
+  }
+  const allUsers = document.querySelectorAll('.user-to-select');
+  for (let i = 0; i < allUsers.length; i++) {
+      allUsers[i].remove();
+  }
+})
+
+//выбор пользователя при редактировании задачи
+listEditUsers.addEventListener("click", function(event){
+  if (event.target.dataset.action === "select"){
+    const selectedUser = event.target.closest(".user-to-edit");
+    getUsers().then(data => {
+      let users = data;
+      const idOfUser = selectedUser.getAttribute("id");
+      users.forEach (function(element) {
+        if(element.id == idOfUser){
+          selectEditUser.innerText = element.username;
         }
       })
     })
@@ -146,12 +179,20 @@ addButtonEdit.addEventListener("click", function(){
       
       todo[indexEditElement].title = inputEditTitle.value;
       todo[indexEditElement].description = inputEditDescription.value;
+      todo[indexEditElement].time = timeForTodos;
+      todo[indexEditElement].user = selectEditUser.textContent;
       
       document.getElementsByClassName("task-todo-title__title")[i]
       .textContent = todo[indexEditElement].title;
       
       document.getElementsByClassName("task-todo-description__info")[i]
       .textContent = todo[indexEditElement].description;
+
+      document.getElementsByClassName("task-todo-user__time")[i]
+      .textContent = todo[indexEditElement].time;
+
+      document.getElementsByClassName("task-todo-user__user-name")[i]
+      .textContent = todo[indexEditElement].user;
 
       taskToEdit.classList.toggle("edit");
       addToLocalStorage("todo", todo);
