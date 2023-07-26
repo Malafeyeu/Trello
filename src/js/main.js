@@ -133,6 +133,7 @@ addButton.addEventListener("click", function(){
 cancelButton.addEventListener("click", function(){
     inputTitle.value = "";
     inputDescription.value = "";
+    selectUser.innerText = "Select user";
 })
 
 //кнопка редактирования задачи
