@@ -28,8 +28,8 @@ getDoneFromLocalStorage();
   //для создания задачи
   selectUser.addEventListener("click", async function(){
     const allUsers = document.querySelectorAll('.user-to-select');
-    if (allUsers.length < 10){
-      let users = await getUsers();
+    let users = await getUsers();
+    if (allUsers.length < users.length){
       for (let i = 0; i < users.length; i++){
           addUser(users[i])
       }
@@ -38,8 +38,8 @@ getDoneFromLocalStorage();
   //для редактирования задачи
   selectEditUser.addEventListener("click", async function(){
     const allUsers = document.querySelectorAll('.user-to-edit');
-    if (allUsers.length < 10){
-      let users = await getUsers();
+    let users = await getUsers();
+    if (allUsers.length < users.length){
       for (let i = 0; i < users.length; i++){
           addEditUser(users[i])
       }
@@ -64,10 +64,6 @@ listOfUsers.addEventListener("click", function(event){
         }
       })
     })
-  }
-  const allUsers = document.querySelectorAll('.user-to-select');
-  for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i].remove();
   }
 })
 
@@ -139,13 +135,10 @@ cancelButton.addEventListener("click", function(){
 //кнопка редактирования задачи
 parentOfAllTodos.addEventListener("click", function(event){
   if (event.target.dataset.action === "edit") {
-
     taskToEdit = event.target.closest(".task-todo");
     idEdit = taskToEdit.getAttribute("id");
-
     todo.forEach ((element, index) => {
       if(element.id == idEdit){
-
         indexEditElement = index;
         inputEditTitle.value = `${todo[indexEditElement].title}`;
         inputEditDescription.value = `${todo[indexEditElement].description}`;
@@ -175,14 +168,13 @@ parentOfAllTodos.addEventListener("click", function(event){
 //кнопка добавления отредаченной задачи
 addButtonEdit.addEventListener("click", function(){
   todo.forEach ((e, i) => {
-
     if(idEdit == e.id) {
       
       todo[indexEditElement].title = inputEditTitle.value;
       todo[indexEditElement].description = inputEditDescription.value;
       todo[indexEditElement].time = timeForTodos;
       todo[indexEditElement].user = selectEditUser.textContent;
-      
+
       document.getElementsByClassName("task-todo-title__title")[i]
       .textContent = todo[indexEditElement].title;
       
