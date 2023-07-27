@@ -24,6 +24,8 @@ getTodoFromLocalStorage();
 getInprogressFromLocalStorage();
 getDoneFromLocalStorage();
 
+selectUser.innerText = "Select user";
+
 //подтягиваем пользователей, генерируем список
   //для создания задачи
   selectUser.addEventListener("click", async function(){
@@ -105,12 +107,15 @@ if(done.length !== 0) {
 
 //добавление задачи
 addButton.addEventListener("click", function(){
+  if(inputTitle.value !== "" 
+    && inputDescription.value !== ""
+    && selectUser.innerText !== "Select user"){
     let newTask = {
-        id: Date.now(),
-        title: inputTitle.value,
-        description: inputDescription.value,
-        user: selectUser.innerText,
-        time: timeForTodos,
+      id: Date.now(),
+      title: inputTitle.value,
+      description: inputDescription.value,
+      user: selectUser.innerText,
+      time: timeForTodos,
     }
     //залить обьект в массив, сгенерировать задачу
     todo.push(newTask);
@@ -123,6 +128,12 @@ addButton.addEventListener("click", function(){
     counterOne.innerText = howManyTasks;
     addToLocalStorage("todo", todo);
     selectUser.innerText = "Select user";
+  } else {
+    alert("Warning! The task will not be added until you fill in all the input fields and select a user. Please, fill in the fields again.");
+    inputTitle.value = "";
+    inputDescription.value = "";
+    selectUser.innerText = "Select user";
+  }
 })
 
 //очистка инпутов при отмене ввода задачи
@@ -167,30 +178,35 @@ parentOfAllTodos.addEventListener("click", function(event){
 
 //кнопка добавления отредаченной задачи
 addButtonEdit.addEventListener("click", function(){
-  todo.forEach ((e, i) => {
-    if(idEdit == e.id) {
-      
-      todo[indexEditElement].title = inputEditTitle.value;
-      todo[indexEditElement].description = inputEditDescription.value;
-      todo[indexEditElement].time = timeForTodos;
-      todo[indexEditElement].user = selectEditUser.textContent;
+  if (inputEditTitle.value !== "" 
+  && inputEditDescription.value !== ""){
+    todo.forEach ((e, i) => {
+      if(idEdit == e.id) {
+        
+        todo[indexEditElement].title = inputEditTitle.value;
+        todo[indexEditElement].description = inputEditDescription.value;
+        todo[indexEditElement].time = timeForTodos;
+        todo[indexEditElement].user = selectEditUser.textContent;
 
-      document.getElementsByClassName("task-todo-title__title")[i]
-      .textContent = todo[indexEditElement].title;
-      
-      document.getElementsByClassName("task-todo-description__info")[i]
-      .textContent = todo[indexEditElement].description;
+        document.getElementsByClassName("task-todo-title__title")[i]
+        .textContent = todo[indexEditElement].title;
+        
+        document.getElementsByClassName("task-todo-description__info")[i]
+        .textContent = todo[indexEditElement].description;
 
-      document.getElementsByClassName("task-todo-user__time")[i]
-      .textContent = todo[indexEditElement].time;
+        document.getElementsByClassName("task-todo-user__time")[i]
+        .textContent = todo[indexEditElement].time;
 
-      document.getElementsByClassName("task-todo-user__user-name")[i]
-      .textContent = todo[indexEditElement].user;
+        document.getElementsByClassName("task-todo-user__user-name")[i]
+        .textContent = todo[indexEditElement].user;
 
-      taskToEdit.classList.toggle("edit");
-      addToLocalStorage("todo", todo);
-    }
-  })
+        taskToEdit.classList.toggle("edit");
+        addToLocalStorage("todo", todo);
+      }
+    })
+  } else {
+    alert("Do not leave input fields empty, otherwise you will not be able to edit your task.")
+  }
 })
 
 //переместить в инпрогресс
