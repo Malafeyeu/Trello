@@ -22,6 +22,7 @@
       width: 100px;
       height: 40px;
       background-color: $white;
+      font-size: 17px;
       @include flex;
       justify-content: center;
       align-items: center;
@@ -50,6 +51,7 @@
       .container-todo__header {
         @include container-header;
         background-color: $green;
+        font-size: 17px;
       }
       .container-tasks {
         //добавление скролла
@@ -80,10 +82,17 @@
           background-color: $green;
           flex-direction: column;
           .task-todo-title {
+            flex-direction: column-reverse;
             @include flex;
-            .task-title__title {
+            .task-todo-title__title {
+              font-size: 17px;
+              text-decoration: underline;
             }
             .btns-todo {
+              margin-left: auto;
+              display: flex;
+              justify-content: space-between;
+              height: 26px;
               .btns-todo__btn-edit {
                 @include button-in-task;
               }
@@ -95,20 +104,24 @@
           .task-todo-description {
             @include flex;
             align-items: center;
+            flex-wrap: nowrap;
+            padding-top: 0;
             .task-description__info {
               @include flex;
             }
             .btns-todo__btn-toInprogress{
-              width: 30px;
-              height: 50px;  
-              @include button-in-task;         
+              min-width: 26px;
+              min-height: 48px;
+              @include button-in-task;
             }
           }
           .task-todo-user {
             @include flex;
             .task-todo-user__user-name {
+              font-size: 14px;
             }
             .task-todo-user__time {
+              font-size: 14px;
             }
           }
         }
@@ -126,6 +139,7 @@
       .container-inprogress__header {
         @include container-header;
         background-color: $gray;
+        font-size: 17px;
       }
       .container-tasks {
         //добавление скролла
@@ -157,10 +171,17 @@
           background-color: $gray;
           flex-direction: column;
           .task-inprogress-title {
+            flex-direction: column-reverse;
             @include flex;
             .task-inprogress-title__title {
+              font-size: 17px;
+              text-decoration: underline;
             }
             .btns-inprogress {
+              margin-left: auto;
+              display: flex;
+              justify-content: space-between;
+              height: 26px;
               .btns-inprogress__btn-back {
                 @include button-in-task;
               }
@@ -171,14 +192,17 @@
           }
           .task-inprogress-description {
             @include flex;
+            padding-top: 0;
             .task-inprogress-description__info {
             }
           }
           .task-inprogress-user {
             @include flex;
             .task-inprogress-user__user-name {
+              font-size: 14px;
             }
             .task-inprogress-user__time {
+              font-size: 14px;
             }
           }
         }
@@ -194,6 +218,7 @@
       .container-done__header {
         @include container-header;
         background-color: $blue;
+        font-size: 17px;
       }
       .container-tasks {
         //добавление скролла
@@ -225,22 +250,30 @@
           flex-direction: column;
           .task-done-title {
             @include flex;
+            flex-direction: column-reverse;
             .task-done-title__title {
+              font-size: 17px;
+              text-decoration: underline;
             }
             .task-done-title__btn-delete {
               @include button-in-task;
+              margin-left: auto;
+              height: 26px;
             }
           }
           .task-done-description {
             @include flex;
+            padding-top: 0;
             .task-done-description__info {
             }
           }
           .task-done-user {
             @include flex;
             .task-done-user__user-name {
+              font-size: 14px;
             }
             .task-done-user__time {
+              font-size: 14px;
             }
           }
         }
